@@ -15,13 +15,8 @@ defmodule ElixirPins do
   end
 
   def export pin do
-    case :os.cmd('echo #{pin} > /sys/class/gpio/export') do
-      [] ->
-        pin
-      error ->
-        IO.inspect error
-        export pin
-    end
+    unless is_exported?(pin), do: :os.cmd('echo #{pin} > /sys/class/gpio/export')
+    pin
   end
 
   def unexport pin do
