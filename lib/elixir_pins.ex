@@ -3,6 +3,7 @@ defmodule ElixirPins do
   def turn_on pin do
     pin
     |> export
+    |> export
     |> set_direction(:out)
     |> set_value(1)
     {:ok, pin}
