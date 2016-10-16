@@ -3,25 +3,28 @@ defmodule ElixirPins do
   def turn_on pin do
     Integer.to_string(pin)
     |> export
-    |> set_out
+    |> set_direction
     |> set_on
   end
 
   def export pin do
-    {:ok, file} = File.open "/sys/class/gpio/export", [:write]
-    IO.binwrite file, pin
+    :os.cmd 'echo #{pin} > /sys/class/gpio/export'
     pin
   end
 
-  def set_out pin do
-    {:ok, file} = File.open "/sys/class/gpio/gpio#{pin}/direction", [:write]
-    IO.binwrite file, "out"
+  def unexport pin do
+    :os.cmd 'echo #{pin} > /sys/class/gpio/unexport'
     pin
   end
 
-  def set_on pin do
-    {:ok, file} = File.open "/sys/class/gpio/gpio#{pin}/value", [:write]
-    IO.binwrite file, "1"
+  def set_direction pin, direction do
+    :os.cmd 'echo #{Atom.to_string(direction)} > /sys/class/gpio/gpio#{pin}/direction'
     pin
   end
+
+  def set_value pin, value do
+    :os.cmd 'echo #{Integer.to_string(value)} > /sys/class/gpio/gpio#{pin}/value'
+    pin
+  end
+
 end
