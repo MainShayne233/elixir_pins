@@ -27,7 +27,7 @@ defmodule ElixirPins do
   end
 
   def set_direction pin, direction do
-    case os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction') do
+    case :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction') do
       [] ->
         pin
       error ->
