@@ -13,6 +13,8 @@ defmodule ElixirPins do
 
   def turn_off pin do
     pin
+    |> set_value('')
+    |> set_direction('')
     |> unexport
     {:ok, pin}
   end
