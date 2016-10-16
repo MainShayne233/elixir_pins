@@ -15,15 +15,23 @@ defmodule ElixirPins do
   end
 
   def export pin do
-    :os.cmd('echo #{pin} > /sys/class/gpio/export')
-    |> IO.inspect
-    pin
+    case :os.cmd('echo #{pin} > /sys/class/gpio/export') do
+      [] ->
+        pin
+      error ->
+        IO.inspect error
+        export pin
+    end
   end
 
   def unexport pin do
-    :os.cmd('echo #{pin} > /sys/class/gpio/unexport')
-    |> IO.inspect
-    pin
+    case :os.cmd('echo #{pin} > /sys/class/gpio/unexport') do
+      [] ->
+        pin
+      error ->
+        IO.inspect error
+        unexport pin
+    end
   end
 
   def set_direction pin, direction do
@@ -32,19 +40,19 @@ defmodule ElixirPins do
         pin
       error ->
         IO.inspect error
-        set_value pin, direction
+        set_direction pin, direction
     end
-    pin
   end
 
   def set_value pin, value do
-    :os.cmd('echo #{value} > /sys/class/gpio/gpio#{pin}/value')
-    |> IO.inspect
-    pin
+    case :os.cmd('echo #{value} > /sys/class/gpio/gpio#{pin}/value') do
+      [] ->
+        pin
+      error ->
+        IO.inspect error
+        set_value pin, value
+    end
   end
 
-  def is_exported? pin do
-
-  end
 
 end
