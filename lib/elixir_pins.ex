@@ -3,8 +3,8 @@ defmodule ElixirPins do
   def turn_on pin do
     Integer.to_string(pin)
     |> export
-    |> set_direction
-    |> set_on
+    |> set_direction(:out)
+    |> set_value(1)
   end
 
   def export pin do
