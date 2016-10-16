@@ -5,16 +5,11 @@ defmodule ElixirPins do
     |> export
     |> set_direction(:out)
     |> set_value(1)
-    |> export
-    |> set_direction(:out)
-    |> set_value(1)
     {:ok, pin}
   end
 
   def turn_off pin do
     pin
-    |> set_value('')
-    |> set_direction('')
     |> unexport
     {:ok, pin}
   end
