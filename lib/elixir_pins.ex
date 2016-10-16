@@ -28,6 +28,7 @@ defmodule ElixirPins do
 
   def set_direction pin, direction do
     :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction')
+    :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction')
     |> IO.inspect
     pin
   end
