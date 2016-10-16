@@ -27,9 +27,13 @@ defmodule ElixirPins do
   end
 
   def set_direction pin, direction do
-    :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction')
-    :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction')
-    |> IO.inspect
+    case os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction') do
+      [] ->
+        pin
+      error ->
+        IO.inspect error
+        set_value pin, direction
+    end
     pin
   end
 
@@ -37,6 +41,10 @@ defmodule ElixirPins do
     :os.cmd('echo #{value} > /sys/class/gpio/gpio#{pin}/value')
     |> IO.inspect
     pin
+  end
+
+  def is_exported? pin do
+
   end
 
 end
