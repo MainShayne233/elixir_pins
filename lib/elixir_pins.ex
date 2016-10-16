@@ -3,8 +3,11 @@ defmodule ElixirPins do
   def turn_on pin do
     pin
     |> export
+    |> IO.inspect
     |> set_direction(:out)
+    |> IO.inspect
     |> set_value(1)
+    |> IO.inspect
     {:ok, pin}
   end
 
