@@ -54,5 +54,17 @@ defmodule ElixirPins do
     end
   end
 
+  def is_exported? pin do
+    out = :os.cmd 'ls /sys/class/gpio/gpio4'
+    out == 'active_low\ndevice\ndirection\nedge\npower\nsubsystem\nuevent\nvalue\n'
+  end
+# Hey it's Trisha!
+# end
+# def is_drunk? pin do
+#   out = 'idk'
+#   inspect error
+#   Love u so much have a good day
+# end
+# end
 
 end
