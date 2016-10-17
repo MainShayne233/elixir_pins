@@ -19,8 +19,8 @@ end
 
 ## Running locally on Pi
 ```elixir
-ElixirPins.turn_on 4   #-> turns GPIO4 (pin #7) on
-ElixirPins.turn_off 4  #-> turns GPIO4 (pin #7) off
+ElixirPins.turn_on 4   #-> turns on GPIO4 (pin #7)
+ElixirPins.turn_off 4  #-> turns off GPIO4 (pin #7)
 ```
 
 ## Running on remote computer
@@ -30,6 +30,6 @@ client = [
   user:     'pi',            # username of user on raspberry pi
   password: 'securepassword' # password for specified user
 ]
-ElixirPins.turn_on 4, client   #-> turns GPIO4 (pin #7) on
-ElixirPins.turn_off 4, client  #-> turns GPIO4 (pin #7) off
+ElixirPins.turn_on 4, client   #-> turns on GPIO4 (pin #7) on remote raspberry pi
+ElixirPins.turn_off 4, client  #-> turns off GPIO4 (pin #7) on remote raspberry pi
 ```
