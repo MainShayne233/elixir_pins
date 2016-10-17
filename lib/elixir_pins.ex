@@ -33,7 +33,6 @@ defmodule ElixirPins do
       [] ->
         pin
       error ->
-        IO.inspect error
         set_direction pin, direction
     end
   end
@@ -43,7 +42,6 @@ defmodule ElixirPins do
       [] ->
         pin
       error ->
-        IO.inspect error
         set_value pin, value
     end
   end
@@ -52,6 +50,5 @@ defmodule ElixirPins do
     out = :os.cmd 'ls /sys/class/gpio/gpio#{pin}'
     out == 'active_low\ndevice\ndirection\nedge\npower\nsubsystem\nuevent\nvalue\n'
   end
-
 
 end
