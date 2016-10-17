@@ -1,24 +1,35 @@
 # ElixirPins
+Elixir API for Raspberry PI GPIO pins
 
-**TODO: Add description**
+## Install
+Add
+```elixir
+{:elixir_pins, "0.0.1"}
+```
+to your dependency list in your mix.exs file.
 
-## Installation
+Example:
+```elixir
+defp deps do
+  [
+    {:elixir_pins, "0.0.1"}
+  ]
+end
+```
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+## Running locally on Pi
+```elixir
+ElixirPins.turn_on 4   #-> turns GPIO4 (pin #7) on
+ElixirPins.turn_off 4  #-> turns GPIO4 (pin #7) off
+```
 
-  1. Add `elixir_pins` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:elixir_pins, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `elixir_pins` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:elixir_pins]]
-    end
-    ```
-
+## Running on remote computer
+``` elixir
+client = [
+  ip:       '192.168.1.123', # ip address of raspberry pi
+  user:     'pi',            # username of user on raspberry pi
+  password: 'securepassword' # password for specified user
+]
+ElixirPins.turn_on 4, client   #-> turns GPIO4 (pin #7) on
+ElixirPins.turn_off 4, client  #-> turns GPIO4 (pin #7) off
+```
