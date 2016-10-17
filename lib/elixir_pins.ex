@@ -15,18 +15,17 @@ defmodule ElixirPins do
   end
 
   def export pin do
-    unless is_exported?(pin), do: :os.cmd('echo #{pin} > /sys/class/gpio/export')
+    unless is_exported?(pin) do
+      :os.cmd 'echo #{pin} > /sys/class/gpio/export'
+    end
     pin
   end
 
   def unexport pin do
-    case :os.cmd('echo #{pin} > /sys/class/gpio/unexport') do
-      [] ->
-        pin
-      error ->
-        IO.inspect error
-        unexport pin
+    if is_exported?(pin) do
+      :os.cmd 'echo #{pin} > /sys/class/gpio/unexport'
     end
+    pin
   end
 
   def set_direction pin, direction do
@@ -50,16 +49,9 @@ defmodule ElixirPins do
   end
 
   def is_exported? pin do
-    out = :os.cmd 'ls /sys/class/gpio/gpio4'
+    out = :os.cmd 'ls /sys/class/gpio/gpio#{pin}'
     out == 'active_low\ndevice\ndirection\nedge\npower\nsubsystem\nuevent\nvalue\n'
   end
-# Hey it's Trisha!
-# end
-# def is_drunk? pin do
-#   out = 'idk'
-#   inspect error
-#   Love u so much have a good day
-# end
-# end
+
 
 end
