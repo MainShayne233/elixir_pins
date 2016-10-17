@@ -1,5 +1,4 @@
 defmodule ElixirPins do
-  :ssh.start
 
   def turn_on pin do
     pin
