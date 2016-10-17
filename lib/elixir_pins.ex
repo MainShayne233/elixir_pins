@@ -23,7 +23,7 @@ defmodule ElixirPins do
     {:ok, pin}
   end
 
-  def turn_off pin, client: client do
+  def turn_off pin, client do
     {:ok, conn} = SSHEx.connect client
     pin
     |> unexport(conn)
@@ -62,7 +62,7 @@ defmodule ElixirPins do
     case :os.cmd('echo #{direction} > /sys/class/gpio/gpio#{pin}/direction') do
       [] ->
         pin
-      error ->
+      _ ->
         set_direction pin, direction
     end
   end
@@ -71,8 +71,7 @@ defmodule ElixirPins do
     case SSHEx.cmd! conn, 'echo #{direction} > /sys/class/gpio/gpio#{pin}/direction' do
       "" ->
         pin
-      error ->
-        IO.inspect error
+      _ ->
         set_direction pin, conn, direction
     end
   end
@@ -81,7 +80,7 @@ defmodule ElixirPins do
     case :os.cmd('echo #{value} > /sys/class/gpio/gpio#{pin}/value') do
       [] ->
         pin
-      error ->
+      _ ->
         set_value pin, value
     end
   end
@@ -90,8 +89,7 @@ defmodule ElixirPins do
     case SSHEx.cmd! conn, 'echo #{value} > /sys/class/gpio/gpio#{pin}/value' do
       "" ->
         pin
-      error ->
-        IO.inspect error
+      _ ->
         set_value pin, conn, value
     end
   end
